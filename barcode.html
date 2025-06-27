@@ -405,6 +405,64 @@
                 padding: 20px 15px;
             }
         }
+        .processing-box, .done-box {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Spinner animation */
+.spinner {
+  margin: 0 auto 10px;
+  width: 30px;
+  height: 30px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #1e3a8a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Done (green tick) box */
+.done-box .checkmark {
+  font-size: 40px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+.done-box p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.ok-btn {
+  padding: 10px 24px;
+  font-size: 15px;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ok-btn:hover {
+  background-color: #162d65;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
     </style>
 </head>
 <body>
@@ -441,7 +499,21 @@
                 </div>
                 <div class="scan-instruction"></div>
                 <div class="warning-text">Screenshots won't get you in.</div>
-                <button class="add-wallet-btn">Add to Wallet</button>
+                <div id="wallet-action">
+                    <button class="add-wallet-btn" onclick="startProcessing()">Add to Wallet</button>
+                  
+                    <div id="processing-box" class="processing-box">
+                      <div class="spinner"></div>
+                      <p>Processing...</p>
+                    </div>
+                  
+                    <div id="done-box" class="done-box">
+                      <div class="checkmark">&#10004;</div>
+                      <p>Ticket has been added to your wallet</p>
+                      <button class="ok-btn" onclick="closeMessage()">OK</button>
+                    </div>
+                  </div>
+                  
             </div>
         </div>
     </div>
@@ -449,5 +521,27 @@
     <div class="page-indicator">
         <div class="dot"></div>
     </div>
+    <script>
+        function startProcessing() {
+          document.querySelector('.add-wallet-btn').style.display = 'none';
+          const processing = document.getElementById('processing-box');
+          const doneBox = document.getElementById('done-box');
+        
+          processing.style.display = 'block';
+        
+          setTimeout(() => {
+            processing.style.display = 'none';
+            doneBox.style.display = 'block';
+          }, 3000); // Show done after 3 seconds
+        }
+        
+        function closeMessage() {
+          document.getElementById('wallet-action').innerHTML = `
+            <p style="text-align:center; color:green; margin-top:20px; font-weight: 500;">
+              All set. You may now close this.
+            </p>`;
+        }
+        </script>
+        
 </body>
 </html>

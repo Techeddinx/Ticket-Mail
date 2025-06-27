@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You Got Tickets To BILLIE EILISH</title>
+
+  <!-- jsPDF and html2canvas CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- JsBarcode CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .mobile-container {
+      max-width: 375px;
+      margin: 0 auto;
+      background-color: white;
+      min-height: 100vh;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-arrow {
+      color: #007AFF;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .notification-badge {
+      background-color: #007AFF;
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #000;
+      flex: 1;
+      text-align: center;
+      margin: 0 16px;
+    }
+
+    .header-arrows {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .arrow {
+      color: #8E8E93;
+      font-size: 12px;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      padding: 40px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .order-number {
+      font-size: 16px;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    .artist-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ticket-details {
+      padding: 24px 20px;
+    }
+
+    .event-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .detail-icon {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      opacity: 0.6;
+    }
+
+    .detail-content {
+      flex: 1;
+    }
+
+    .detail-text {
+      font-size: 16px;
+      color: #000;
+      margin-bottom: 4px;
+    }
+
+    .get-directions {
+      color: #007AFF;
+      font-size: 16px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .get-directions:hover {
+      text-decoration: underline;
+    }
+
+    .mobile-ticket-btn {
+      background-color: #007AFF;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 600;
+      width: 100%;
+      margin: 24px 0;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .mobile-ticket-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .important-info {
+      margin-top: 32px;
+    }
+
+    .important-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 16px;
+    }
+
+    .info-box {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 16px;
+      background-color: #f9fafb;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg#barcode {
+      width: 100%;
+      height: 60px;
+    }
+
+    .calendar-icon::before {
+      content: "📅";
+      font-size: 18px;
+    }
+
+    .location-icon::before {
+      content: "📍";
+      font-size: 18px;
+    }
+
+    .ticket-icon::before {
+      content: "🎫";
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-container" id="ticketContent">
+    <header class="header">
+      <div class="header-left">
+        <span class="back-arrow">‹</span>
+        <div class="notification-badge">1</div>
+      </div>
+      <div class="header-title">You Got Tickets To BILLIE E...</div>
+      <div class="header-arrows">
+        <span class="arrow">▲</span>
+        <span class="arrow">▼</span>
+      </div>
+    </header>
+
+    <section class="hero-section">
+      <h1 class="hero-title">You Got the Tickets</h1>
+      <p class="order-number">Order # 36-34287/FLO</p>
+    </section>
+
+    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250627-WA0002%20%282%29.jpg-qEgSA2Ch8hHGzGipHWpvatj8xS9KAw.jpeg" alt="Billie Eilish" class="artist-image">
+
+    <div class="ticket-details">
+      <h2 class="event-title">BILLIE EILISH: HIT ME HARD AND SOFT: THE TOUR</h2>
+
+      <div class="detail-item">
+        <span class="detail-icon calendar-icon"></span>
+        <div class="detail-content">
+          <div class="detail-text">Sun • Oct 12, 2025 • 7:00 PM</div>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-icon location-icon"></span>
+        <div class="detail-content">
+          <div class="detail-text">Kaseya Center — Miami, Florida</div>
+          <a href="#" class="get-directions">Get Directions</a>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-icon ticket-icon"></span>
+        <div class="detail-content">
+          <div class="detail-text">Sec 324, Row 20, Seat 11 - 12</div>
+        </div>
+      </div>
+
+      <!-- Mobile Ticket Button (triggers PDF download) -->
+      <button class="mobile-ticket-btn" onclick="downloadPDF()">Download Mobile Ticket</button>
+
+      <div class="important-info">
+        <h3 class="important-title"></h3>
+        <div class="info-box">
+          <svg id="barcode"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Generate barcode when page loads
+    window.onload = () => {
+      JsBarcode("#barcode", "32420112025", {
+        format: "CODE128",
+        lineColor: "#000",
+        width: 2,
+        height: 60,
+        displayValue: false
+      });
+    };
+
+    async function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const content = document.getElementById("ticketContent");
+
+      html2canvas(content, { scale: 2 }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/jpeg", 1.0);
+        const pdf = new jsPDF("p", "mm", "a4");
+        const width = pdf.internal.pageSize.getWidth();
+        const height = (canvas.height * width) / canvas.width;
+
+        pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+        pdf.save("billie_eilish_ticket.pdf");
+      });
+    }
+  </script>
+</body>
+</html>

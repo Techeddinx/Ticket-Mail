@@ -525,14 +525,18 @@
         function startProcessing() {
           document.querySelector('.add-wallet-btn').style.display = 'none';
           const processing = document.getElementById('processing-box');
-          const doneBox = document.getElementById('done-box');
-        
           processing.style.display = 'block';
         
           setTimeout(() => {
-            processing.style.display = 'none';
-            doneBox.style.display = 'block';
-          }, 3000); // Show done after 3 seconds
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'tick.html'; // <-- Change this to your target page
+            downloadLink.textContent = 'Download';
+            downloadLink.className = 'ok-btn';
+            downloadLink.style.marginTop = '15px';
+            downloadLink.style.display = 'inline-block';
+            
+            processing.appendChild(downloadLink);
+          }, 3000);
         }
         
         function closeMessage() {
@@ -542,6 +546,8 @@
             </p>`;
         }
         </script>
+        
+        
         
 </body>
 </html>

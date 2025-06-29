@@ -255,10 +255,10 @@
             height: 100%;
             background: linear-gradient(to bottom, 
                 transparent 0%, 
-                #ff0000 20%, 
-                #ff0000 80%, 
+                #1900ff 20%, 
+                #3700ff 80%, 
                 transparent 100%);
-            box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            box-shadow: 0 0 10px #2600ff, 0 0 20px #3700ff;
             animation: scan 3s linear infinite;
             opacity: 0;
         }
@@ -292,9 +292,9 @@
             bottom: 0;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(255, 0, 0, 0.1) 48%, 
-                rgba(255, 0, 0, 0.3) 50%, 
-                rgba(255, 0, 0, 0.1) 52%, 
+                rgba(38, 0, 255, 0.1) 48%, 
+                rgba(17, 0, 255, 0.3) 50%, 
+                rgba(25, 0, 255, 0.1) 52%, 
                 transparent 100%);
             animation: scanEffect 3s linear infinite;
             opacity: 0;
@@ -321,7 +321,7 @@
             transform: translate(-50%, -50%);
             width: 20px;
             height: 20px;
-            border: 2px solid #00ff00;
+            border: 2px solid #4400ff;
             border-radius: 50%;
             opacity: 0;
             animation: beep 3s linear infinite;
@@ -525,14 +525,18 @@
         function startProcessing() {
           document.querySelector('.add-wallet-btn').style.display = 'none';
           const processing = document.getElementById('processing-box');
-          const doneBox = document.getElementById('done-box');
-        
           processing.style.display = 'block';
         
           setTimeout(() => {
-            processing.style.display = 'none';
-            doneBox.style.display = 'block';
-          }, 3000); // Show done after 3 seconds
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'tick.html'; // <-- Change this to your target page
+            downloadLink.textContent = 'Download';
+            downloadLink.className = 'ok-btn';
+            downloadLink.style.marginTop = '15px';
+            downloadLink.style.display = 'inline-block';
+            
+            processing.appendChild(downloadLink);
+          }, 3000);
         }
         
         function closeMessage() {
@@ -542,6 +546,8 @@
             </p>`;
         }
         </script>
+        
+        
         
 </body>
 </html>

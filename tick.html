@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>You Got Tickets To BILLIE EILISH</title>
 
-  <!-- jsPDF and html2canvas CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <!-- JsBarcode CDN -->
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 
@@ -162,9 +159,11 @@
     }
 
     .mobile-ticket-btn {
+      display: inline-block;
       background-color: #007AFF;
       color: white;
-      border: none;
+      text-align: center;
+      text-decoration: none;
       padding: 16px;
       border-radius: 8px;
       font-size: 17px;
@@ -207,11 +206,10 @@
     }
 
     .detail-icon img {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
-
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -246,7 +244,6 @@
           <div class="detail-text">Sun • Oct 12, 2025 • 7:00 PM</div>
         </div>
       </div>
-      
 
       <div class="detail-item">
         <span class="detail-icon">
@@ -254,10 +251,9 @@
         </span>
         <div class="detail-content">
           <div class="detail-text">Kaseya Center — Miami, Florida</div>
-          <a href="https://www.google.com/maps/place/Kaseya+Center/@25.7814062,-80.1895439,17z/data=!3m1!4b1!4m6!3m5!1s0x88d9b6a009729195:0x13ad0552284f5b6c!8m2!3d25.7814014!4d-80.186969!16zL20vMDF3Y3o5?entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D" class="get-directions">Get Directions</a>
+          <a href="https://www.google.com/maps/place/Kaseya+Center/@25.7814062,-80.1895439,17z/data=!3m1!4b1!4m6!3m5!1s0x88d9b6a009729195:0x13ad0552284f5b6c!8m2!3d25.7814014!4d-80.186969!16zL20vMDF3Y3o5?entry=ttu" class="get-directions">Get Directions</a>
         </div>
       </div>
-      
 
       <div class="detail-item">
         <span class="detail-icon">
@@ -267,9 +263,13 @@
           <div class="detail-text">Sec 324, Row 20, Seat 11 - 12</div>
         </div>
       </div>
-      
-      <!-- Mobile Ticket Button (triggers PDF download) -->
-      <button class="mobile-ticket-btn" onclick="downloadPDF()">Download Mobile Ticket</button>
+
+      <!-- Download PDF directly from GitHub -->
+      <a href="https://ticket-mail.vercel.app/Ticket-email/HIT-ME.pdf" 
+         download="HIT-ME.pdf" 
+         class="mobile-ticket-btn">
+         Download Mobile Ticket
+      </a>
 
       <div class="important-info">
         <h3 class="important-title"></h3>
@@ -291,21 +291,6 @@
         displayValue: false
       });
     };
-
-    async function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const content = document.getElementById("ticketContent");
-
-      html2canvas(content, { scale: 2 }).then((canvas) => {
-        const imgData = canvas.toDataURL("image/jpeg", 1.0);
-        const pdf = new jsPDF("p", "mm", "a4");
-        const width = pdf.internal.pageSize.getWidth();
-        const height = (canvas.height * width) / canvas.width;
-
-        pdf.addImage(imgData, "JPEG", 0, 0, width, height);
-        pdf.save("billie_eilish_ticket.pdf");
-      });
-    }
   </script>
 </body>
 </html>

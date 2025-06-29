@@ -206,20 +206,12 @@
       height: 60px;
     }
 
-    .calendar-icon::before {
-      content: "📅";
-      font-size: 18px;
-    }
+    .detail-icon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
 
-    .location-icon::before {
-      content: "📍";
-      font-size: 18px;
-    }
-
-    .ticket-icon::before {
-      content: "🎫";
-      font-size: 18px;
-    }
   </style>
 </head>
 <body>
@@ -241,33 +233,41 @@
       <p class="order-number">Order # 36-34287/FLO</p>
     </section>
 
-    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250627-WA0002%20%282%29.jpg-qEgSA2Ch8hHGzGipHWpvatj8xS9KAw.jpeg" alt="Billie Eilish" class="artist-image">
+    <img src="https://ticket-email.infy.uk/images/ht-me-hard.PNG" alt="Billie Eilish" class="artist-image">
 
     <div class="ticket-details">
       <h2 class="event-title">BILLIE EILISH: HIT ME HARD AND SOFT: THE TOUR</h2>
 
       <div class="detail-item">
-        <span class="detail-icon calendar-icon"></span>
+        <span class="detail-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Calendar Icon">
+        </span>
         <div class="detail-content">
           <div class="detail-text">Sun • Oct 12, 2025 • 7:00 PM</div>
         </div>
       </div>
+      
 
       <div class="detail-item">
-        <span class="detail-icon location-icon"></span>
+        <span class="detail-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Location Icon">
+        </span>
         <div class="detail-content">
           <div class="detail-text">Kaseya Center — Miami, Florida</div>
-          <a href="#" class="get-directions">Get Directions</a>
+          <a href="https://www.google.com/maps/place/Kaseya+Center/@25.7814062,-80.1895439,17z/data=!3m1!4b1!4m6!3m5!1s0x88d9b6a009729195:0x13ad0552284f5b6c!8m2!3d25.7814014!4d-80.186969!16zL20vMDF3Y3o5?entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D" class="get-directions">Get Directions</a>
         </div>
       </div>
+      
 
       <div class="detail-item">
-        <span class="detail-icon ticket-icon"></span>
+        <span class="detail-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Ticket Icon">
+        </span>
         <div class="detail-content">
           <div class="detail-text">Sec 324, Row 20, Seat 11 - 12</div>
         </div>
       </div>
-
+      
       <!-- Mobile Ticket Button (triggers PDF download) -->
       <button class="mobile-ticket-btn" onclick="downloadPDF()">Download Mobile Ticket</button>
 
